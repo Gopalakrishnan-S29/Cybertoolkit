@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Port Guardian++ 🔒</h2>
+<p>Scans your system for open ports and highlights risky ones.</p>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+        <th>Port</th>
+        <th>Service</th>
+        <th>Process</th>
+        <th>Status</th>
+        <th>Risk Level</th>
+    </tr>
+    {% for entry in ports %}
+    <tr>
+        <td>{{ entry.port }}</td>
+        <td>{{ entry.service }}</td>
+        <td>{{ entry.process }}</td>
+        <td>Listening</td>
+        <td>
+            {% if entry.port in risky_ports %}
+                <span style="color: red; font-weight: bold;">⚠️ Risky</span>
+            {% else %}
+                <span style="color: green;">✅ Safe</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if not ports %}
+    <p style="color: gray;">No open ports detected.</p>
+{% endif %}
+
+<!-- ✅ Button to trigger email -->
+<form action="{{ url_for('send_port_report') }}" method="POST">
+    <button type="submit" style="margin-top:15px; padding:10px 20px; font-weight:bold; background:#007BFF; color:white; border:none; border-radius:6px;">
+        📧 Send Report to Email
+    </button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSecToolkit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Cyber Security Toolkit 🔐</h1>
+        <nav>
+            {% if request.endpoint == 'index' %}
+                <!-- On dashboard: show all tools -->
+                <a href="{{ url_for('index') }}">Dashboard</a> |
+                <a href="{{ url_for('portguardian') }}">Port Guardian++</a> |
+                <a href="{{ url_for('phisheye') }}">PhishEye</a> |
+                <a href="{{ url_for('wifiguard') }}">WiFi Guard</a> |
+                <a href="{{ url_for('logsentinel') }}">Log Sentinel</a> |
+                <a href="{{ url_for('stegguardian') }}">StegGuardian</a> |
+                <a href="{{ url_for('tracenet') }}">TraceNet</a> |
+                <a href="{{ url_for('metaspy') }}">MetaSpy</a> |
+                <a href="{{ url_for('bannerhunter') }}">BannerHunter</a> |
+                <a href="{{ url_for('leakscope') }}">LeakScope</a> |
+                <a href="{{ url_for('crawleye') }}">CrawlEye</a>
+            {% else %}
+                <!-- On tool pages: show only Dashboard -->
+                <a href="{{ url_for('index') }}">⬅ Back to Dashboard</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

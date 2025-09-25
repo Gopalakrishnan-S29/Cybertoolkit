@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    background: #f4f4f9;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
+    background: #222;
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+.card:hover {
+    background: #f0f8ff;
+    transform: scale(1.03);
+}
+
+table {
+    width: 90%;
+    margin: 1rem auto;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+th {
+    background: #444;
+    color: white;
+}
+.risky {
+    background: #ffe6e6;
+    color: #b30000;
+    font-weight: bold;
+}
+.btn {
+    display: block;
+    margin: 1rem auto;
+    padding: 10px 20px;
+    background: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn:hover {
+    background: #005fa3;
+}
+.back-btn {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+    text-decoration: none;
+}
