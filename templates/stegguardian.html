@@ -1,194 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>StegGuardian | Cyber Security Toolkit</title>
+{% extends "base.html" %}
+{% block content %}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #EEE8DF; /* softer than DACFC3 */
-            color: #333;
-        }
+<!-- ================= STEGGUARDIAN HEADER ================= -->
+<div class="pg-header-row">
 
-        .tool-container {
-            max-width: 920px;
-            margin: 48px auto;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 14px 30px rgba(0,0,0,0.08);
-        }
+    <div class="pg-header-left">
+        <a href="{{ url_for('system_security') }}" class="pg-back-btn">← Back</a>
 
-        /* Header */
-        .tool-header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 16px;
-            margin-bottom: 24px;
-        }
-
-        .btn-back {
-            display: inline-block;
-            background: #FDECEA;
-            color: #B42318;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            margin-bottom: 12px;
-        }
-
-        h2 {
-            margin: 0;
-            font-size: 26px;
-        }
-
-        .subtitle {
-            margin-top: 6px;
-            font-size: 14px;
-            color: #666;
-            max-width: 600px;
-        }
-
-        /* Upload Section */
-        .upload-box {
-            margin: 24px 0;
-            padding: 20px;
-            background: #F8FAFC;
-            border-radius: 10px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        input[type="file"] {
-            font-size: 14px;
-        }
-
-        button {
-            background: #2f80ed;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        button:hover {
-            background: #256ad8;
-        }
-
-        img {
-            max-width: 320px;
-            border-radius: 8px;
-            margin: 12px 0;
-            border: 1px solid #eee;
-        }
-
-        /* Report */
-        h3 {
-            margin-top: 32px;
-            font-size: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 16px;
-            font-size: 14px;
-        }
-
-        th {
-            background: #F2F5FA;
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .risk-low {
-            color: #27ae60;
-            font-weight: 600;
-        }
-
-        .risk-medium {
-            color: #f2994a;
-            font-weight: 600;
-        }
-
-        .risk-high {
-            color: #eb5757;
-            font-weight: 600;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="tool-container">
-
-    <!-- Header -->
-    <div class="tool-header">
-        <a href="{{ url_for('index') }}" class="btn-back">← Dashboard</a>
-        <h2>🖼️ StegGuardian</h2>
-        <p class="subtitle">
-            Detect hidden data inside images using statistical steganalysis.
-        </p>
+        <div>
+            <h1 class="page-title">StegGuardian</h1>
+            <p class="page-desc">
+                Detect hidden data inside images using statistical steganalysis
+            </p>
+        </div>
     </div>
-
-    <!-- Upload -->
-    <form method="POST" enctype="multipart/form-data" class="upload-box">
-        <input type="file" name="image" accept=".png,.jpg,.jpeg" required>
-        <button type="submit">Analyze Image</button>
-    </form>
-
-    {% if image_name %}
-        <p><strong>Uploaded Image:</strong> {{ image_name }}</p>
-        <img src="{{ url_for('uploaded_file', filename=image_name) }}" alt="Uploaded Image">
-    {% endif %}
-
-    {% if result %}
-        <h3>🔍 Analysis Report</h3>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Metric</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Resolution</td><td>{{ result.resolution }}</td></tr>
-                <tr><td>File Size (KB)</td><td>{{ result.file_size_kb }}</td></tr>
-                <tr><td>Entropy</td><td>{{ result.entropy }}</td></tr>
-                <tr><td>LSB Anomaly Score</td><td>{{ result.lsb_score }}</td></tr>
-                <tr><td>Size Anomaly</td><td>{{ result.size_anomaly }}</td></tr>
-                <tr>
-                    <td><strong>Risk Level</strong></td>
-                    <td>
-                        {% if result.risk == "Low" %}
-                            <span class="risk-low">🟢 Low</span>
-                        {% elif result.risk == "Medium" %}
-                            <span class="risk-medium">🟡 Medium</span>
-                        {% else %}
-                            <span class="risk-high">🔴 High</span>
-                        {% endif %}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    {% endif %}
 
 </div>
 
-</body>
-</html>
+<div class="divider"></div>
+
+<!-- ================= UPLOAD PANEL ================= -->
+<form method="POST" enctype="multipart/form-data" class="sg-upload-box">
+
+    <input type="file"
+           name="image"
+           accept=".png,.jpg,.jpeg"
+           class="sg-file-input"
+           required>
+
+    <button type="submit" class="sg-btn primary">
+        Analyze Image
+    </button>
+
+</form>
+
+{% if image_name %}
+<div class="sg-preview">
+    <div class="sg-preview-info">
+        <strong>Uploaded Image:</strong> {{ image_name }}
+    </div>
+
+    <img src="{{ url_for('uploaded_file', filename=image_name) }}"
+         alt="Uploaded Image"
+         class="sg-image">
+</div>
+{% endif %}
+
+{% if result %}
+<div class="divider"></div>
+
+<h3 class="sg-subtitle">Analysis Report</h3>
+
+<table class="pg-table">
+    <thead>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Resolution</td><td>{{ result.resolution }}</td></tr>
+        <tr><td>File Size (KB)</td><td>{{ result.file_size_kb }}</td></tr>
+        <tr><td>Entropy</td><td>{{ result.entropy }}</td></tr>
+        <tr><td>LSB Anomaly Score</td><td>{{ result.lsb_score }}</td></tr>
+        <tr><td>Size Anomaly</td><td>{{ result.size_anomaly }}</td></tr>
+
+        <tr class="
+            {% if result.risk == 'High' %}risk
+            {% elif result.risk == 'Medium' %}warn
+            {% else %}safe{% endif %}
+        ">
+            <td><strong>Risk Level</strong></td>
+            <td>
+                {% if result.risk == "Low" %}
+                    <span class="risk safe">Low</span>
+                {% elif result.risk == "Medium" %}
+                    <span class="risk warn">Medium</span>
+                {% else %}
+                    <span class="risk high">High</span>
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

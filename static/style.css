@@ -634,3 +634,333 @@ body {
 .ic-table-wrap {
     margin-top: 24px;
 }
+
+/* ======================================================
+   WIFIGUARD (THEME 18)
+   ====================================================== */
+
+.wg-actions {
+    margin-bottom: 18px;
+}
+
+.wg-btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.wg-btn:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.wg-advanced-link {
+    font-size: 14px;
+    color: var(--blue-main);
+    text-decoration: none;
+    border: 1px solid var(--border-soft);
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.wg-advanced-link:hover {
+    border-color: var(--blue-main);
+}
+
+.wg-error {
+    background: rgba(255,42,42,0.12);
+    color: var(--red-main);
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.wg-table-wrap {
+    margin-top: 22px;
+}
+
+.wg-subtitle {
+    margin: 12px 0;
+    font-size: 16px;
+}
+
+.wg-footer {
+    margin-top: 26px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* ======================================================
+   WIFIGUARD ADVANCED (THEME 18)
+   ====================================================== */
+
+.wg-adv-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin-bottom: 24px;
+}
+
+.wg-metric-box {
+    background: linear-gradient(180deg, #070b12, #05080f);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 18px 22px;
+}
+
+.wg-metric-box .label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.wg-metric-box .value {
+    font-size: 34px;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.wg-metric-box.danger .value { color: var(--red-main); }
+.wg-metric-box.warn .value { color: #facc15; }
+.wg-metric-box.info .value { color: var(--blue-main); }
+
+.wg-adv-section {
+    margin-bottom: 28px;
+}
+
+.wg-subtitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.wg-footer {
+    margin-top: 26px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* ======================================================
+   CONFIGGUARD (THEME 18)
+   ====================================================== */
+
+.cg-table-wrap {
+    margin-top: 24px;
+}
+
+.cg-fix-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.cg-fix-btn:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.cg-footer {
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+
+/* ======================================================
+   SOC MULTI-SEVERITY TABLE GLOW (FINAL)
+   ====================================================== */
+
+/* Base table border */
+.pg-table {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* ================= HIGH RISK (RED) ================= */
+
+.pg-table tbody tr.risk:hover {
+    background: rgba(255, 42, 42, 0.15);
+    box-shadow:
+        inset 0 0 18px rgba(255, 42, 42, 0.55),
+        0 0 10px rgba(255, 42, 42, 0.35);
+}
+
+/* ================= MEDIUM RISK (YELLOW) ================= */
+
+.pg-table tbody tr.warn:hover {
+    background: rgba(250, 204, 21, 0.15);
+    box-shadow:
+        inset 0 0 18px rgba(250, 204, 21, 0.55),
+        0 0 10px rgba(250, 204, 21, 0.35);
+}
+
+/* ================= SAFE (GREEN) ================= */
+
+.pg-table tbody tr.safe:hover {
+    background: rgba(34, 197, 94, 0.15);
+    box-shadow:
+        inset 0 0 18px rgba(34, 197, 94, 0.55),
+        0 0 10px rgba(34, 197, 94, 0.35);
+}
+
+/* ================= HEADER LINE ================= */
+
+.pg-table thead th {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ======================================================
+   CONFIGGUARD (THEME 18)
+   ====================================================== */
+
+.cg-table-wrap {
+    margin-top: 24px;
+}
+
+.cg-fix-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.cg-fix-btn:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.cg-footer {
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* ======================================================
+   STEGGUARDIAN (THEME 18)
+   ====================================================== */
+
+.sg-upload-box {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 18px;
+    background: linear-gradient(180deg, #070b12, #05080f);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+}
+
+.sg-file-input {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.sg-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.sg-btn.primary:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.sg-preview {
+    margin-top: 18px;
+}
+
+.sg-preview-info {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.sg-image {
+    max-width: 340px;
+    border-radius: 12px;
+    border: 1px solid var(--border-soft);
+}
+
+.sg-subtitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+/* ======================================================
+   SETTINGS PAGE (THEME 18)
+   ====================================================== */
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.settings-card {
+    background: linear-gradient(180deg, #070b12, #05080f);
+    border-radius: 16px;
+    padding: 20px 22px;
+    border: 1px solid var(--border-soft);
+}
+
+.settings-card h3 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--text-main);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-value {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* Toggle (read-only look) */
+.settings-item input[type="checkbox"] {
+    accent-color: var(--red-main);
+    cursor: not-allowed;
+}
+
+/* Disclaimer */
+.settings-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+}

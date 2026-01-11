@@ -1,14 +1,96 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Settings</h2>
 
-<p>
-    Application configuration and preferences will be available here.
-</p>
+<!-- ================= SETTINGS HEADER ================= -->
+<div class="pg-header-row">
 
-<p>
-    This section may include version details, UI preferences,
-    and maintenance options in the future.
-</p>
+    <div class="pg-header-left">
+        <!-- BACK BUTTON -->
+        <a href="{{ url_for('index') }}" class="pg-back-btn">← Back</a>
+
+        <div>
+            <h1 class="page-title">Settings</h1>
+            <p class="page-desc">
+                Application preferences and security behavior configuration
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- ================= SETTINGS GRID ================= -->
+<div class="settings-grid">
+
+    <!-- INTERFACE SETTINGS -->
+    <div class="settings-card">
+        <h3>Interface</h3>
+
+        <div class="settings-item">
+            <span>Dark Web Theme</span>
+            <input type="checkbox" checked disabled>
+        </div>
+
+        <div class="settings-item">
+            <span>UI Animations</span>
+            <input type="checkbox" checked disabled>
+        </div>
+    </div>
+
+    <!-- SCAN SETTINGS -->
+    <div class="settings-card">
+        <h3>Scan Behavior</h3>
+
+        <div class="settings-item">
+            <span>Passive Scanning Only</span>
+            <input type="checkbox" checked disabled>
+        </div>
+
+        <div class="settings-item">
+            <span>Auto Risk Classification</span>
+            <input type="checkbox" checked disabled>
+        </div>
+    </div>
+
+    <!-- REPORT SETTINGS -->
+    <div class="settings-card">
+        <h3>Reporting</h3>
+
+        <div class="settings-item">
+            <span>Default Report Format</span>
+            <span class="settings-value">PDF</span>
+        </div>
+
+        <div class="settings-item">
+            <span>Include Risk Summary</span>
+            <input type="checkbox" checked disabled>
+        </div>
+    </div>
+
+    <!-- LOGGING SETTINGS -->
+    <div class="settings-card">
+        <h3>Logging</h3>
+
+        <div class="settings-item">
+            <span>Log Level</span>
+            <span class="settings-value">Security Events</span>
+        </div>
+
+        <div class="settings-item">
+            <span>History Retention</span>
+            <span class="settings-value">Session Only</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- ================= DISCLAIMER ================= -->
+<div class="settings-note">
+    ⚠️ This toolkit performs <strong>defensive and passive analysis only</strong>.
+    No active exploitation, traffic interception, or system modification is performed.
+</div>
+
 {% endblock %}
