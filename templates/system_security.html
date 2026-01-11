@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header center">
+    <h1 class="page-title">System Security</h1>
+    <p class="page-desc">
+        Defensive tools for protecting and analyzing system security
+    </p>
+</div>
+
+<div class="tool-grid image-style">
+
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/system_security/portguardian.png') }}" alt="PortGuardian">
+        <div class="tool-body">
+            <h3>PortGuardian++</h3>
+            <p>Detect open and risky listening ports</p>
+            <a href="{{ url_for('portguardian') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/system_security/integrity.png') }}" alt="Integrity Checker">
+        <div class="tool-body">
+            <h3>Integrity Checker</h3>
+            <p>Monitor file and system integrity</p>
+            <a href="{{ url_for('integrity_checker') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/system_security/wifi.png') }}" alt="WiFiGuard">
+        <div class="tool-body">
+            <h3>WiFiGuard</h3>
+            <p>Quick wireless network scan</p>
+            <a href="{{ url_for('wifiguard') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/system_security/wifi_advanced.png') }}" alt="WiFiGuard Advanced">
+        <div class="tool-body">
+            <h3>WiFiGuard Advanced</h3>
+            <p>Deep wireless security analysis</p>
+            <a href="{{ url_for('wifiguard_v2') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/system_security/config.png') }}" alt="ConfigGuard">
+        <div class="tool-body">
+            <h3>ConfigGuard</h3>
+            <p>System configuration security checks</p>
+            <a href="{{ url_for('configguard') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/system_security/steg.png') }}" alt="StegGuardian">
+        <div class="tool-body">
+            <h3>StegGuardian</h3>
+            <p>Steganography & image tampering detection</p>
+            <a href="{{ url_for('stegguardian') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

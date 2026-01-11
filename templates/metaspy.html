@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MetaSpy | Cyber Security Toolkit</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #EEE8DF;
+            color: #333;
+        }
+
+        .tool-container {
+            max-width: 950px;
+            margin: 48px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+        }
+
+        .btn-back {
+            display: inline-block;
+            background: #FDECEA;
+            color: #B42318;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+            font-size: 14px;
+            color: #666;
+            max-width: 700px;
+        }
+
+        .panel {
+            margin-top: 22px;
+        }
+
+        .upload-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        input[type="file"] {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2f80ed;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .options {
+            margin-top: 14px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+
+        .note {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .kv {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .kv b {
+            width: 160px;
+            color: #444;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        h4 {
+            margin-top: 22px;
+        }
+
+        ul {
+            padding-left: 18px;
+            font-size: 14px;
+        }
+
+        pre {
+            background: #F2F5FA;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+
+        .error {
+            background: #FDECEA;
+            color: #B42318;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="tool-container">
+
+    <a href="{{ url_for('index') }}" class="btn-back">← Dashboard</a>
+
+    <h2>🕵️ MetaSpy — File & Image Intelligence</h2>
+    <p class="subtitle">
+        Upload image, PDF, or DOCX files to extract metadata and perform
+        passive forensic analysis.  
+        Analyze only files you own or have permission to test.
+    </p>
+
+    <!-- ===== Upload Panel ===== -->
+    <div class="panel">
+        <form action="{{ url_for('metaspy') }}" method="POST" enctype="multipart/form-data">
+
+            <div class="upload-row">
+                <input
+                    type="file"
+                    name="file"
+                    accept=".jpg,.jpeg,.png,.tif,.tiff,.pdf,.docx"
+                    required
+                >
+                <button type="submit">Analyze</button>
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox" name="stego" checked>
+                    Steganography Detection
+                </label>
+
+                <label>
+                    <input type="checkbox" name="integrity" checked>
+                    Image Integrity Check
+                </label>
+            </div>
+
+            <div class="note">
+                ✔ Passive analysis only · No data extraction · No external APIs
+            </div>
+
+        </form>
+    </div>
+
+    <!-- ===== Results ===== -->
+    {% if target %}
+    <div class="panel">
+
+        <h3>Results — {{ target }}</h3>
+
+        {% if result.error %}
+            <div class="error">
+                Error: {{ result.error }}
+            </div>
+        {% endif %}
+
+        <div class="kv"><b>Filename:</b><div>{{ result.filename }}</div></div>
+        <div class="kv"><b>File size:</b><div>{{ result.file_size }} bytes</div></div>
+        <div class="kv"><b>Type:</b><div>{{ result.type }} ({{ result.mime }})</div></div>
+        <div class="kv"><b>FS created:</b><div>{{ result.fs_created }}</div></div>
+        <div class="kv"><b>FS modified:</b><div>{{ result.fs_modified }}</div></div>
+
+        <h4>Extracted Intelligence</h4>
+
+        {% if result.metadata %}
+            <ul>
+                {% for k, v in result.metadata.items() %}
+                    <li>
+                        <strong>{{ k }}</strong>:
+                        {% if v is mapping %}
+                            <pre>{{ v | tojson(indent=2) }}</pre>
+                        {% else %}
+                            <span style="word-break:break-word">{{ v }}</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="note">No metadata found.</div>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

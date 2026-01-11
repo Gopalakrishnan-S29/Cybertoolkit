@@ -1,74 +1,359 @@
+/* ======================================================
+   THEME 18 – DARK WEB / SOC UI (CLEAN FINAL VERSION)
+   ====================================================== */
+
+/* -------------------- ROOT -------------------- */
+:root {
+    --bg-main: #05080f;
+    --bg-panel: #070b12;
+    --bg-soft: #0b0f18;
+
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+
+    --red-main: #ff2a2a;
+    --blue-main: #38bdf8;
+    --green-main: #22c55e;
+
+    --border-soft: rgba(255,255,255,0.08);
+}
+
+/* -------------------- RESET -------------------- */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    background: #f4f4f9;
-    color: #333;
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    background: radial-gradient(circle at top, #0b1220, #05080f);
+    color: var(--text-main);
 }
 
-header {
-    text-align: center;
-    padding: 1rem;
-    background: #222;
-    color: white;
+/* -------------------- LAYOUT -------------------- */
+.app-container {
+    display: flex;
+    min-height: 100vh;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
+/* ======================================================
+   SIDEBAR (PROJECT NAV – RED STYLE)
+   ====================================================== */
+
+.sidebar-dark {
+    width: 260px;
+    background: linear-gradient(180deg, #0d1117, #05080f);
+    padding: 22px 16px;
 }
 
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
+.sidebar-brand {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+/* Menu */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 16px;
     text-decoration: none;
-    color: black;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: 0.2s;
-}
-.card:hover {
-    background: #f0f8ff;
-    transform: scale(1.03);
+    color: var(--text-muted);
+    transition: 0.25s;
 }
 
-table {
-    width: 90%;
-    margin: 1rem auto;
-    border-collapse: collapse;
+.menu-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-table, th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+
+.menu-item:hover {
+    background: #000;
+    color: var(--red-main);
 }
-th {
-    background: #444;
-    color: white;
+
+.menu-item:hover .menu-icon {
+    color: var(--red-main);
 }
-.risky {
-    background: #ffe6e6;
-    color: #b30000;
-    font-weight: bold;
+
+.menu-item.active {
+    background: #000;
+    color: var(--red-main);
 }
-.btn {
-    display: block;
-    margin: 1rem auto;
-    padding: 10px 20px;
-    background: #0078d7;
-    color: white;
-    border: none;
-    border-radius: 6px;
+
+.menu-item.active .menu-icon {
+    color: var(--red-main);
+}
+
+/* ======================================================
+   MAIN CONTENT
+   ====================================================== */
+
+.main-content {
+    flex: 1;
+    padding: 32px 40px;
+}
+
+/* Page header */
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.page-desc {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.divider {
+    height: 1px;
+    background: var(--border-soft);
+    margin: 24px 0;
+}
+
+/* ======================================================
+   SYSTEM SECURITY – TOOL CARDS (IMAGE STYLE)
+   ====================================================== */
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 28px;
+}
+
+.tool-card {
+    background: var(--bg-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+    transition: 0.3s;
+}
+
+.tool-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    filter: brightness(0.85);
+}
+
+.tool-body {
+    padding: 18px 20px 22px;
+}
+
+.tool-card h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.tool-card p {
+    margin: 8px 0 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.tool-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--red-main);
+}
+
+.tool-card:hover img {
+    filter: brightness(1);
+}
+
+.tool-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid var(--red-main);
+    color: var(--red-main);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.tool-btn:hover {
+    background: var(--red-main);
+    color: #000;
+}
+
+/* ======================================================
+   PORTGUARDIAN++ – SOC PANEL (IMAGE-2 STYLE)
+   ====================================================== */
+
+.pg-soc {
+    background: linear-gradient(180deg, #070b12, #04060b);
+    border-radius: 14px;
+    border: 1px solid var(--border-soft);
+    overflow: hidden;
+}
+
+/* Top bar */
+.pg-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.pg-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.pg-report-btn {
+    background: transparent;
+    color: var(--red-main);
+    border: 1px solid var(--red-main);
+    padding: 8px 16px;
+    border-radius: 10px;
     cursor: pointer;
 }
-.btn:hover {
-    background: #005fa3;
+
+.pg-report-btn:hover {
+    background: rgba(255,42,42,0.15);
 }
-.back-btn {
+
+/* Metrics strip */
+.pg-metrics-strip {
+    position: relative;
+    display: flex;
+    gap: 40px;
+    padding: 22px 24px;
+    height: 160px;
+}
+
+.pg-metric .label {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.pg-metric .value {
+    font-size: 42px;
+    margin-top: 6px;
+}
+
+.value.blue { color: var(--blue-main); }
+.value.red { color: var(--red-main); }
+
+/* Globe image */
+.pg-globe {
+    position: absolute;
+    right: -90px;
+    top: -30px;
+    height: 220px;
+}
+
+.pg-globe img {
+    height: 100%;
+    opacity: 0.95;
+}
+
+/* Table */
+.pg-table-wrap {
+    background: #05080f;
+    border-top: 1px solid var(--border-soft);
+}
+
+.pg-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pg-table th {
+    padding: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: left;
+}
+
+.pg-table td {
+    padding: 12px 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.pg-table tr.risk {
+    background: rgba(255,42,42,0.12);
+}
+
+/* Risk badges */
+.risk {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.risk.high {
+    background: rgba(255,42,42,0.2);
+    color: var(--red-main);
+}
+
+.risk.safe {
+    background: rgba(34,197,94,0.2);
+    color: var(--green-main);
+}
+/* ===== PORTGUARDIAN METRIC BOXES (THEME 18) ===== */
+
+.pg-metric-boxes {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+/* Common box */
+.pg-metric-box {
+    min-width: 220px;
+    padding: 18px 22px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #070b12, #05080f);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 0 18px rgba(0,0,0,0.6);
+}
+
+/* Label */
+.pg-metric-box .label {
     display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #333;
-    text-decoration: none;
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 6px;
+}
+
+/* Value */
+.pg-metric-box .value {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* Safe (blue) */
+.pg-metric-box.safe .value {
+    color: #38bdf8;
+}
+
+/* Danger (red) */
+.pg-metric-box.danger {
+    border-color: rgba(255,42,42,0.4);
+}
+
+.pg-metric-box.danger .value {
+    color: #ff2a2a;
 }

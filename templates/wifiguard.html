@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WiFiGuard – Wireless Security Scan</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============ GLOBAL ============ */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+/* ============ HEADER ============ */
+.header {
+    background: linear-gradient(90deg, #e0ecff, #f5f9ff);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #dbeafe;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #1e40af;
+}
+
+.header p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #475569;
+}
+
+/* ============ CONTAINER ============ */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* ============ TOOL HEADER ============ */
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.tool-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.tool-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 6px;
+}
+
+/* ============ BUTTONS ============ */
+.btn-primary {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-secondary {
+    display: inline-block;
+    margin-top: 8px;
+    background: #e0ecff;
+    color: #1e40af;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: #dbeafe;
+}
+
+/* ============ ALERT ============ */
+.alert {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ============ TABLE WRAPPER ============ */
+.table-wrapper,
+.table-card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 28px;
+    overflow: hidden;
+}
+
+/* ============ TABLE ============ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f1f5f9;
+    color: #334155;
+    padding: 14px;
+    text-align: left;
+    font-size: 14px;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+/* ============ RISK BADGES ============ */
+.risk-badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.safe {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.risky {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ============ ROW DANGER ============ */
+.row-danger {
+    background: #fff1f2;
+}
+
+/* ============ CHANNEL BADGE ============ */
+.badge.danger {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ============ FOOTER ============ */
+.tool-footer {
+    font-size: 14px;
+    color: #64748b;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 16px;
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>📡 WiFiGuard</h1>
+    <p>Passive Wireless Security Scanner</p>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+    <div class="tool-header">
+        <div>
+            <h2>WiFi Network Scan</h2>
+            <a href="{{ url_for('wifiguard_v2') }}" class="btn-secondary">
+                🧠 Advanced Analysis
+            </a>
+            <p class="tool-subtitle">
+                Scans nearby wireless networks and analyzes security risks,
+                signal strength, and channel usage.
+            </p>
+        </div>
+
+        <form method="POST">
+            <button type="submit" class="btn-primary">
+                🔍 Scan WiFi Networks
+            </button>
+        </form>
+    </div>
+
+    {% if error %}
+        <div class="alert error">{{ error }}</div>
+    {% endif %}
+
+    {% if networks %}
+    <!-- NETWORK RESULTS -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>SSID</th>
+                    <th>Security</th>
+                    <th>Signal</th>
+                    <th>Channel</th>
+                    <th>Risk Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for net in networks %}
+                <tr class="{% if net.risk in ['High','Critical'] %}row-danger{% endif %}">
+                    <td>{{ net.ssid or "Hidden" }}</td>
+                    <td>{{ net.security }}</td>
+                    <td>{{ net.signal if net.signal is defined else "—" }}</td>
+                    <td>{{ net.channel if net.channel is defined else "—" }}</td>
+                    <td>
+                        {% if net.risk == "Critical" %}
+                            <span class="risk-badge risky">Critical</span>
+                        {% elif net.risk == "High" %}
+                            <span class="risk-badge risky">High</span>
+                        {% elif net.risk == "Medium" %}
+                            <span class="risk-badge medium">Medium</span>
+                        {% elif net.risk == "Low" %}
+                            <span class="risk-badge safe">Low</span>
+                        {% else %}
+                            <span class="risk-badge">Unknown</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if channel_congestion %}
+    <!-- CHANNEL CONGESTION -->
+    <div class="table-card">
+        <h3 style="margin:16px;">📶 Channel Congestion Analysis</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Channel</th>
+                    <th>Networks Detected</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ch in channel_congestion %}
+                <tr>
+                    <td>{{ ch.channel }}</td>
+                    <td>{{ ch.networks }}</td>
+                    <td><span class="badge danger">Congested</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <div class="tool-footer">
+        ℹ️ WiFiGuard performs <strong>passive scanning only</strong>.  
+        No traffic interception or active attacks are performed.
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-btn">⬅ Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

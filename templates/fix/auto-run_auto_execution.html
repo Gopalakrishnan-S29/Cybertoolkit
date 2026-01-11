@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto-Run / Auto-Execution | Cyber Security Toolkit</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #DACFC3;   /* Outside rectangle color */
+            color: #333;
+        }
+
+        .fix-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 16px;
+            background: #FDECEA;
+            color: #B42318;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: #FAD1CC;
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .alert {
+            background: #FDECEA;
+            color: #B42318;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .section p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .os-box {
+            background: #f2f5fa;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        ul {
+            padding-left: 18px;
+            font-size: 14px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .best-practice {
+            background: #EAF4FF;
+            color: #1f4fd8;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="fix-container">
+
+    <!-- Back Button -->
+    <a href="{{ url_for('configguard') }}" class="btn-back">
+        ← Back to ConfigGuard
+    </a>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>🔌 Auto-Run / Auto-Execution</h2>
+        <p class="subtitle">
+            Prevent removable media from executing files automatically.
+        </p>
+    </div>
+
+    <!-- Risk Alert -->
+    <div class="alert">
+        <strong>Risk Detected:</strong> Auto-run allows malicious USB devices to execute automatically.
+    </div>
+
+    <!-- Why it matters -->
+    <div class="section">
+        <h3>Why this matters</h3>
+        <p>
+            Many malware attacks spread using infected USB drives that rely on auto-execution to run malicious files
+            without user interaction.
+        </p>
+    </div>
+
+    <!-- Windows Steps -->
+    <div class="section os-box">
+        <h3>🪟 Windows – How to fix</h3>
+        <ul>
+            <li>Open <strong>Control Panel</strong></li>
+            <li>Go to <strong>AutoPlay</strong> settings</li>
+            <li>Uncheck <strong>Use AutoPlay for all media</strong></li>
+            <li>Save changes</li>
+        </ul>
+    </div>
+
+    <!-- Linux Steps -->
+    <div class="section os-box">
+        <h3>🐧 Linux – How to fix</h3>
+        <ul>
+            <li>Open system settings</li>
+            <li>Disable removable media auto-execution</li>
+            <li>Avoid mounting unknown USB devices</li>
+        </ul>
+    </div>
+
+    <!-- Best Practice -->
+    <div class="best-practice">
+        ✅ Best Practice: Always scan removable media before opening files.
+    </div>
+
+</div>
+
+</body>
+</html>

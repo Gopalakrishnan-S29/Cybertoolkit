@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Antivirus Protection | Cyber Security Toolkit</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #DACFC3;
+            color: #333;
+        }
+
+        .fix-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .alert {
+            background: #FDECEA;
+            color: #B42318;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .section p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        ul {
+            padding-left: 18px;
+            font-size: 14px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .os-box {
+            background: #f2f5fa;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .best-practice {
+            background: #EAF4FF;
+            color: #1f4fd8;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 16px;
+            background: #FDECEA;
+            color: #B42318;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: #FAD1CC;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="fix-container">
+
+    <!-- Back Button -->
+    <a href="{{ url_for('configguard') }}" class="btn-back">
+        ← Back to ConfigGuard
+    </a>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>🛡️ Antivirus Protection</h2>
+        <p class="subtitle">
+            Ensure antivirus software is enabled to protect against malware.
+        </p>
+    </div>
+
+    <!-- Risk Alert -->
+    <div class="alert">
+        <strong>Risk Detected:</strong> Without antivirus, malware may go undetected.
+    </div>
+
+    <!-- Why it matters -->
+    <div class="section">
+        <h3>Why this matters</h3>
+        <p>
+            Antivirus software detects, blocks, and removes malicious files before they can harm your system.
+        </p>
+    </div>
+
+    <!-- Windows Steps -->
+    <div class="section os-box">
+        <h3>🪟 Windows – How to fix</h3>
+        <ul>
+            <li>Open <strong>Windows Security</strong></li>
+            <li>Go to <strong>Virus &amp; Threat Protection</strong></li>
+            <li>Enable <strong>Real-time protection</strong></li>
+        </ul>
+    </div>
+
+    <!-- Linux Steps -->
+    <div class="section os-box">
+        <h3>🐧 Linux – How to fix</h3>
+        <ul>
+            <li>Install <strong>ClamAV</strong> or another antivirus solution</li>
+            <li>Update virus definitions regularly</li>
+            <li>Run periodic system scans</li>
+        </ul>
+    </div>
+
+    <!-- Best Practice -->
+    <div class="best-practice">
+        ✅ Best Practice: Always keep antivirus definitions updated.
+    </div>
+
+</div>
+
+</body>
+</html>

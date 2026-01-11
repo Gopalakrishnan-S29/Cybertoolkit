@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CrawlEye | Cyber Security Toolkit</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #EEE8DF;
+            color: #333;
+        }
+
+        .tool-container {
+            max-width: 1100px;
+            margin: 48px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+        }
+
+        .btn-back {
+            display: inline-block;
+            background: #FDECEA;
+            color: #B42318;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+            font-size: 14px;
+            color: #666;
+            max-width: 750px;
+        }
+
+        /* Crawl box */
+        .crawl-box {
+            margin: 28px auto;
+            padding: 22px;
+            border: 2px dashed #2f80ed;
+            border-radius: 14px;
+            text-align: center;
+            max-width: 720px;
+            background: #F9FBFF;
+        }
+
+        .crawl-box h3 {
+            margin-top: 0;
+            color: #2f80ed;
+        }
+
+        .crawl-box p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .crawl-inputs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .crawl-inputs input {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .crawl-inputs input[type="text"] {
+            width: 380px;
+            max-width: 100%;
+        }
+
+        .crawl-inputs input[type="number"] {
+            width: 120px;
+        }
+
+        .crawl-inputs button {
+            background: #2f80ed;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Results panel */
+        .panel {
+            margin-top: 30px;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #666;
+        }
+
+        h4 {
+            margin-top: 22px;
+            font-size: 17px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 14px;
+            table-layout: fixed;
+            font-size: 14px;
+        }
+
+        th {
+            background: #F2F5FA;
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+            word-break: break-word;
+        }
+
+        th:nth-child(1), td:nth-child(1){ width:60px; }
+        th:nth-child(2), td:nth-child(2){ width:auto; }
+        th:nth-child(3), td:nth-child(3){ width:140px; }
+
+        /* Badges */
+        .badge-high {
+            color: #eb5757;
+            font-weight: 600;
+        }
+
+        .badge-ok {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        a {
+            color: #2f80ed;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="tool-container">
+
+    <a href="{{ url_for('index') }}" class="btn-back">← Dashboard</a>
+
+    <h2>🕷️ CrawlEye — Website Surface Mapper</h2>
+    <p class="subtitle">
+        Passively maps a website to discover exposed pages, hidden paths,
+        and potentially risky endpoints. No exploitation performed.
+    </p>
+
+    <!-- ===== Crawl Box ===== -->
+    <form method="POST">
+        <div class="crawl-box">
+            <h3>🌐 Crawl a Website</h3>
+            <p>Enter a target URL and the maximum number of pages to crawl.</p>
+
+            <div class="crawl-inputs">
+                <input
+                    type="text"
+                    name="target"
+                    placeholder="https://example.com"
+                    required
+                    value="{{ target or '' }}"
+                >
+
+                <input
+                    type="number"
+                    name="depth"
+                    value="{{ depth or 50 }}"
+                    min="10"
+                    max="200"
+                >
+
+                <button type="submit">Start Crawl</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- ===== Results ===== -->
+    {% if result %}
+    <div class="panel">
+
+        <h3>🎯 Target: <span class="small">{{ result.base_url }}</span></h3>
+        <p class="small">Total Pages Discovered: {{ result.total_urls }}</p>
+
+        <!-- Sensitive Paths -->
+        <h4>⚠️ Sensitive Paths Detected</h4>
+        {% if result.sensitive %}
+            <ul>
+                {% for s in result.sensitive %}
+                    <li class="badge-high">
+                        {{ s.path }} ({{ s.status }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="badge-ok">No common sensitive paths detected</p>
+        {% endif %}
+
+        <!-- robots.txt -->
+        <h4>🤖 robots.txt Disallowed Paths</h4>
+        {% if result.robots %}
+            <ul>
+                {% for r in result.robots %}
+                    <li>{{ r }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="small">No disallowed paths found</p>
+        {% endif %}
+
+        <!-- sitemap.xml -->
+        <h4>🗺️ sitemap.xml URLs</h4>
+        {% if result.sitemap %}
+            <ul>
+                {% for s in result.sitemap %}
+                    <li>
+                        <a href="{{ s }}" target="_blank">{{ s }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="small">No sitemap.xml found</p>
+        {% endif %}
+
+        <!-- Discovered URLs -->
+        <h4>🔗 Discovered URLs</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>URL</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in result.urls %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="{{ u }}" target="_blank">{{ u }}</a>
+                    </td>
+                    <td>
+                        {% if 'admin' in u or 'login' in u or 'config' in u %}
+                            <span class="badge-high">High-Value</span>
+                        {% else %}
+                            Normal
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -2,36 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberSecToolkit</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Cyber Security Toolkit 🔐</h1>
-        <nav>
-            {% if request.endpoint == 'index' %}
-                <!-- On dashboard: show all tools -->
-                <a href="{{ url_for('index') }}">Dashboard</a> |
-                <a href="{{ url_for('portguardian') }}">Port Guardian++</a> |
-                <a href="{{ url_for('phisheye') }}">PhishEye</a> |
-                <a href="{{ url_for('wifiguard') }}">WiFi Guard</a> |
-                <a href="{{ url_for('logsentinel') }}">Log Sentinel</a> |
-                <a href="{{ url_for('stegguardian') }}">StegGuardian</a> |
-                <a href="{{ url_for('tracenet') }}">TraceNet</a> |
-                <a href="{{ url_for('metaspy') }}">MetaSpy</a> |
-                <a href="{{ url_for('bannerhunter') }}">BannerHunter</a> |
-                <a href="{{ url_for('leakscope') }}">LeakScope</a> |
-                <a href="{{ url_for('crawleye') }}">CrawlEye</a>
-            {% else %}
-                <!-- On tool pages: show only Dashboard -->
-                <a href="{{ url_for('index') }}">⬅ Back to Dashboard</a>
-            {% endif %}
-        </nav>
-    </header>
+    <title>Cyber Security Toolkit</title>
 
-    <main>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-dark">
+
+        <div class="sidebar-brand">
+            Cyber Security Toolkit
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="{{ url_for('index') }}"
+               class="menu-item {% if request.endpoint == 'index' %}active{% endif %}">
+                <span class="menu-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                <span class="menu-text">Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('system_security') }}"
+               class="menu-item {% if request.endpoint == 'system_security' %}active{% endif %}">
+                <span class="menu-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                <span class="menu-text">System Security</span>
+            </a>
+
+            <a href="{{ url_for('reconnaissance') }}"
+               class="menu-item {% if request.endpoint == 'reconnaissance' %}active{% endif %}">
+                <span class="menu-icon"><i class="fa-solid fa-binoculars"></i></span>
+                <span class="menu-text">Reconnaissance</span>
+            </a>
+
+            <a href="{{ url_for('history') }}"
+               class="menu-item {% if request.endpoint == 'history' %}active{% endif %}">
+                <span class="menu-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                <span class="menu-text">History / Logs</span>
+            </a>
+
+            <a href="{{ url_for('settings') }}"
+               class="menu-item {% if request.endpoint == 'settings' %}active{% endif %}">
+                <span class="menu-icon"><i class="fa-solid fa-gear"></i></span>
+                <span class="menu-text">Settings</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
         {% block content %}{% endblock %}
     </main>
+
+</div>
+
 </body>
 </html>

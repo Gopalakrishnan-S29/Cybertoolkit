@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browser Security Hygiene | Cyber Security Toolkit</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #DACFC3;   /* Outside rectangle color */
+            color: #333;
+        }
+
+        .fix-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 16px;
+            background: #FDECEA;
+            color: #B42318;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: #FAD1CC;
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .alert {
+            background: #FDECEA;
+            color: #B42318;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .section p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .os-box {
+            background: #f2f5fa;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        ul {
+            padding-left: 18px;
+            font-size: 14px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .best-practice {
+            background: #EAF4FF;
+            color: #1f4fd8;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="fix-container">
+
+    <!-- Back Button -->
+    <a href="{{ url_for('configguard') }}" class="btn-back">
+        ← Back to ConfigGuard
+    </a>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>🌐 Browser Security Hygiene</h2>
+        <p class="subtitle">
+            Reduce browser-based attack surface by keeping browsers clean and updated.
+        </p>
+    </div>
+
+    <!-- Risk Alert -->
+    <div class="alert">
+        <strong>Risk Detected:</strong> Outdated browsers and extensions increase attack surface.
+    </div>
+
+    <!-- Why it matters -->
+    <div class="section">
+        <h3>Why this matters</h3>
+        <p>
+            Browsers are the most targeted applications by attackers because they directly interact with
+            untrusted websites, downloads, and scripts on a daily basis.
+        </p>
+    </div>
+
+    <!-- Windows Steps -->
+    <div class="section os-box">
+        <h3>🪟 Windows – How to fix</h3>
+        <ul>
+            <li>Update your browser to the <strong>latest version</strong></li>
+            <li>Remove <strong>unnecessary or unused extensions</strong></li>
+            <li>Enable built-in <strong>safe browsing</strong> features</li>
+        </ul>
+    </div>
+
+    <!-- Linux Steps -->
+    <div class="section os-box">
+        <h3>🐧 Linux – How to fix</h3>
+        <ul>
+            <li>Update browser packages using your package manager</li>
+            <li>Review installed extensions regularly</li>
+            <li>Disable or remove unknown add-ons</li>
+        </ul>
+    </div>
+
+    <!-- Best Practice -->
+    <div class="best-practice">
+        ✅ Best Practice: Install browser updates as soon as they are released.
+    </div>
+
+</div>
+
+</body>
+</html>

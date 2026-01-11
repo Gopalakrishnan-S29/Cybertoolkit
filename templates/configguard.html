@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ConfigGuard – Configuration Security Analyzer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============ GLOBAL ============ */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+/* ============ HEADER ============ */
+.header {
+    background: linear-gradient(90deg, #e0ecff, #f5f9ff);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #dbeafe;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #1e40af;
+}
+
+.header p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #475569;
+}
+
+/* ============ CONTAINER ============ */
+.container {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+/* ============ TITLE ============ */
+.tool-header h2 {
+    margin-bottom: 6px;
+    font-size: 22px;
+}
+
+.tool-subtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* ============ TABLE ============ */
+.table-wrapper {
+    background: #ffffff;
+    border-radius: 14px;
+    margin-top: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.security-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.security-table thead th {
+    background: #f1f5f9;
+    color: #334155;
+    padding: 14px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.security-table tbody td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.security-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* ============ RISK BADGES ============ */
+.risk-badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.safe {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.risky {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ============ HIGH RISK ROW ============ */
+.row-danger {
+    background: #fff1f2;
+}
+
+/* ============ BUTTON ============ */
+.fix-btn {
+    background: #2563eb;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.fix-btn:hover {
+    background: #1d4ed8;
+}
+
+/* ============ FOOTER ============ */
+.footer-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>⚙️ ConfigGuard</h1>
+    <p>Secure Configuration & Hardening Analyzer</p>
+</div>
+
+<div class="container">
+
+    <div class="tool-header">
+        <h2>Configuration Security Assessment</h2>
+        <p class="tool-subtitle">
+            Detect insecure system configurations and receive guided remediation steps.
+        </p>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="security-table">
+            <thead>
+                <tr>
+                    <th>Configuration Check</th>
+                    <th>Status</th>
+                    <th>Risk Level</th>
+                    <th>Recommendation</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in results %}
+                <tr class="{% if item.risk == 'High' %}row-danger{% endif %}">
+                    <td>{{ item.check }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>
+                        {% if item.risk == 'Low' %}
+                            <span class="risk-badge safe">Low</span>
+                        {% elif item.risk == 'Medium' %}
+                            <span class="risk-badge medium">Medium</span>
+                        {% else %}
+                            <span class="risk-badge risky">High</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.recommendation }}</td>
+                    <td>
+                        {% if item.slug is defined %}
+                            <a href="{{ url_for('fix_guide', check_name=item.slug) }}"
+                               target="_blank"
+                               class="fix-btn">How to Fix</a>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer-note">
+        ℹ️ ConfigGuard provides advisory guidance only. No system settings are modified automatically.
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-link">⬅ Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
