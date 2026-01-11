@@ -1,51 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- ================= PORTGUARDIAN SOC HEADER ================= -->
-<section class="pg-soc">
+<!-- ================= HEADER ROW ================= -->
+<div class="pg-header-row">
 
-    <!-- TOP BAR -->
-    <div class="pg-topbar">
-        <div class="pg-brand">
-            <span class="pg-icon">🛡️</span>
-            <span class="pg-title">PortGuardian++</span>
+    <!-- LEFT: BACK + TITLE -->
+    <div class="pg-header-left">
+        <a href="{{ url_for('system_security') }}" class="pg-back-btn">
+            ← Back
+        </a>
+
+        <div class="page-header">
+            <h1 class="page-title">Port Guardian++</h1>
+            <p class="page-desc">
+                Active port monitoring and risk identification
+            </p>
         </div>
+    </div>
 
+    <!-- RIGHT: REPORT -->
+    <div class="pg-header-action">
         <form action="{{ url_for('send_port_report') }}" method="POST">
             <button class="pg-report-btn">Generate Report</button>
         </form>
     </div>
 
-    <!-- METRICS STRIP -->
-    <div class="pg-metrics-strip">
+</div>
+<div class="divider"></div>
 
-        <div class="pg-metric">
-            <span class="pg-label">Total Open Connections</span>
-            <span class="pg-value blue">{{ ports | length }}</span>
-        </div>
+<!-- ================= METRIC BOXES ================= -->
+<div class="pg-metric-boxes">
 
-        <div class="pg-divider"></div>
-
-        <div class="pg-metric">
-            <span class="pg-label">Risky Ports</span>
-            <span class="pg-value red">
-                {{ ports | selectattr("port", "in", risky_ports) | list | length }}
-            </span>
-        </div>
-
-        <!-- GLOBE IMAGE -->
-        <div class="pg-globe">
-            <img src="{{ url_for('static', filename='images/tools/portguardian_visual.png') }}">
-        </div>
-
+    <div class="pg-metric-box safe">
+        <span class="label">Total Open Ports</span>
+        <span class="value">{{ ports | length }}</span>
     </div>
 
-    <!-- SCAN LINE -->
-    <div class="pg-scanline"></div>
+    <div class="pg-metric-box danger">
+        <span class="label">Risky Ports</span>
+        <span class="value">
+            {{ ports | selectattr("port", "in", risky_ports) | list | length }}
+        </span>
+    </div>
 
-</section>
+</div>
 
-<!-- ================= RESULTS TABLE ================= -->
+<div class="divider"></div>
+
+<!-- ================= PORT TABLE ================= -->
 <section class="pg-table-wrap">
 
     <table class="pg-table">
@@ -58,6 +60,7 @@
                 <th>Risk</th>
             </tr>
         </thead>
+
         <tbody>
             {% for entry in ports %}
             <tr class="{% if entry.port in risky_ports %}risk{% endif %}">
@@ -67,9 +70,9 @@
                 <td>Listening</td>
                 <td>
                     {% if entry.port in risky_ports %}
-                        <span class="risk-badge high">High</span>
+                        <span class="risk high">High</span>
                     {% else %}
-                        <span class="risk-badge safe">Safe</span>
+                        <span class="risk safe">Safe</span>
                     {% endif %}
                 </td>
             </tr>

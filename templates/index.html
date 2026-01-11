@@ -1,52 +1,64 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- PAGE HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Dashboard</h1>
+    <h1 class="page-title">Welcome to CyberSec Toolkit</h1>
     <p class="page-desc">
-        Overview of the Cyber Security Toolkit and available security modules
+        Security posture overview and quick access to core modules
     </p>
 </div>
 
+<br>
 <div class="divider"></div>
-
+<!-- ABOUT TOOLKIT -->
 <div class="panel">
     <h2>About This Toolkit</h2>
     <p>
-        Cyber Security Toolkit is a modular security platform designed for
-        defensive security analysis and reconnaissance. It provides a set
-        of focused tools grouped into dedicated modules for clarity and ease
-        of use.
+        Cyber Security Toolkit is a modular security platform designed
+        for defensive security analysis and reconnaissance. Tools are
+        grouped into focused modules to provide clarity, efficiency,
+        and operational control.
     </p>
+</div>
+
+
+<div class="divider"></div>
+<br>
+<!-- QUICK MODULE ACCESS -->
+<div class="dashboard-modules">
+    <div class="dashboard-module">
+        <h3>🛡 System Security</h3>
+        <p>
+            Defensive tools to monitor ports, verify integrity,
+            analyze configurations, and detect threats.
+        </p>
+        <a href="{{ url_for('system_security') }}">Open</a>
+    </div>
+
+    <div class="dashboard-module">
+        <h3>🔍 Reconnaissance</h3>
+        <p>
+            Information gathering tools for metadata extraction,
+            service discovery, and technology profiling.
+        </p>
+        <a href="{{ url_for('reconnaissance') }}">Open</a>
+    </div>
 </div>
 
 <div class="divider"></div>
 
-<div class="panel">
-    <h2>Modules Overview</h2>
 
-    <h3>🛡 System Security</h3>
-    <p>
-        Defensive tools used to detect vulnerabilities, configuration issues,
-        suspicious network activity, and hidden threats.
-    </p>
 
-    <h3>🔍 Reconnaissance</h3>
-    <p>
-        Information gathering tools used to analyze targets, extract metadata,
-        identify technologies, and understand network paths.
-    </p>
-</div>
 
-<div class="divider"></div>
-
+<!-- HOW TO USE -->
 <div class="panel">
     <h2>How to Use</h2>
     <ol>
         <li>Select a module from the left sidebar</li>
-        <li>Choose the appropriate tool</li>
-        <li>Provide input and run the analysis</li>
-        <li>Review results carefully</li>
+        <li>Choose the appropriate security tool</li>
+        <li>Provide required input and run the scan</li>
+        <li>Review results and act accordingly</li>
     </ol>
 </div>
 
