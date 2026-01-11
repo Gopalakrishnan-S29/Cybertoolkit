@@ -1,115 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reconnaissance | Cyber Security Toolkit</title>
-
-    <!-- Main Theme CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-
-<div class="app-container">
-
-    <!-- ================= SIDEBAR ================= -->
-    <aside class="sidebar-dark">
-        <div class="sidebar-brand">Cyber Security Toolkit</div>
-
-        <nav class="sidebar-menu">
-            <a href="{{ url_for('index') }}" class="menu-item">
-                <span class="menu-icon">📊</span> Dashboard
-            </a>
-
-            <a href="{{ url_for('system_security') }}" class="menu-item">
-                <span class="menu-icon">🛡️</span> System Security
-            </a>
-
-            <a href="{{ url_for('reconnaissance') }}" class="menu-item active">
-                <span class="menu-icon">🛰️</span> Reconnaissance
-            </a>
-
-            <a href="#" class="menu-item">
-                <span class="menu-icon">📜</span> History / Logs
-            </a>
-
-            <a href="#" class="menu-item">
-                <span class="menu-icon">⚙️</span> Settings
-            </a>
-        </nav>
-    </aside>
-
-    <!-- ================= MAIN CONTENT ================= -->
-    <main class="main-content">
+{% extends "base.html" %}
+{% block content %}
 
         <!-- ===== PAGE HEADER ===== -->
-        <div class="page-header">
-            <h1 class="page-title">Reconnaissance</h1>
-            <p class="page-desc">
-                Information gathering & intelligence tools for target analysis
-            </p>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- ===== RECON TOOL GRID ===== -->
-        <section class="tool-grid image-style">
-
-            <!-- MetaSpy -->
-            <div class="tool-card">
-                <img src="{{ url_for('static', filename='images/reconnaissance/metaspy.png') }}">
-                <div class="tool-body">
-                    <h3>MetaSpy</h3>
-                    <p>Extract metadata from documents and images</p>
-                    <a href="{{ url_for('metaspy') }}" class="tool-btn">Open Tool</a>
-                </div>
-            </div>
-
-            <!-- BannerHunter -->
-            <div class="tool-card">
-                <img src="{{ url_for('static', filename='images/reconnaissance/bannerhunter.png') }}">
-                <div class="tool-body">
-                    <h3>BannerHunter</h3>
-                    <p>Service banner grabbing & version detection</p>
-                    <a href="{{ url_for('bannerhunter') }}" class="tool-btn">Open Tool</a>
-                </div>
-            </div>
-
-            <!-- TechStack Profiler -->
-            <div class="tool-card">
-                <img src="{{ url_for('static', filename='images/reconnaissance/techstack.png') }}">
-                <div class="tool-body">
-                    <h3>TechStack Profiler</h3>
-                    <p>Detect backend technologies & frameworks</p>
-                    <a href="{{ url_for('techstackprofiler') }}" class="tool-btn">Open Tool</a>
-                </div>
-            </div>
-
-            <!-- CrawlEye -->
-            <div class="tool-card">
-                <img src="{{ url_for('static', filename='images/reconnaissance/crawleye.png') }}">
-                <div class="tool-body">
-                    <h3>CrawlEye</h3>
-                    <p>Website crawling & hidden path discovery</p>
-                    <a href="{{ url_for('crawleye') }}" class="tool-btn">Open Tool</a>
-                </div>
-            </div>
-
-            <!-- TraceNet -->
-            <div class="tool-card">
-                <img src="{{ url_for('static', filename='images/reconnaissance/tracenet.png') }}">
-                <div class="tool-body">
-                    <h3>TraceNet</h3>
-                    <p>Network path tracing & DNS intelligence</p>
-                    <a href="{{ url_for('tracenet') }}" class="tool-btn">Open Tool</a>
-                </div>
-            </div>
-
-        </section>
-
-    </main>
-
+    <div class="page-header center">
+    <h1 class="page-title">Reconnaissance</h1>
+    <p class="page-desc">
+        Information gathering & intelligence tools for target analysis
+    </p>
 </div>
 
-</body>
-</html>
+
+<div class="tool-grid image-style">
+    <!-- MetaSpy -->
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/reconnaissance/metaspy.jpg') }}">
+        <div class="tool-body">
+            <h3>MetaSpy</h3>
+            <p>Extract metadata from documents and images</p>
+            <a href="{{ url_for('metaspy') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <!-- BannerHunter -->
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/reconnaissance/bannerhunter.jpg') }}">
+        <div class="tool-body">
+            <h3>BannerHunter</h3>
+            <p>Service banner grabbing & version detection</p>
+            <a href="{{ url_for('bannerhunter') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <!-- TechStack Profiler -->
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/reconnaissance/techstack.jpg') }}">
+        <div class="tool-body">
+            <h3>TechStack Profiler</h3>
+            <p>Detect backend technologies & frameworks</p>
+            <a href="{{ url_for('techstackprofiler') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <!-- CrawlEye -->
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/reconnaissance/crawleye.jpg') }}">
+        <div class="tool-body">
+            <h3>CrawlEye</h3>
+            <p>Website crawling & hidden path discovery</p>
+            <a href="{{ url_for('crawleye') }}" class="tool-btn">Open</a>
+        </div>
+    </div>
+
+    <!-- TraceNet -->
+    <div class="tool-card">
+        <img src="{{ url_for('static', filename='images/reconnaissance/tracenet.jpg') }}">
+        <div class="tool-body">
+            <h3>TraceNet</h3>
+            <p>Network path tracing & DNS intelligence</p>
+            <a href="{{ url_for('tracenet') }}" class="tool-btn">Open </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
