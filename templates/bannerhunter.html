@@ -1,236 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BannerHunter | Cyber Security Toolkit</title>
+{% extends "base.html" %}
+{% block content %}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #EEE8DF;
-            color: #333;
-        }
+<!-- ================= BANNERHUNTER HEADER ================= -->
+<div class="pg-header-row">
 
-        .tool-container {
-            max-width: 1100px;
-            margin: 48px auto;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 14px 30px rgba(0,0,0,0.08);
-        }
+    <div class="pg-header-left">
+        <a href="{{ url_for('reconnaissance') }}" class="pg-back-btn">← Back</a>
 
-        .btn-back {
-            display: inline-block;
-            background: #FDECEA;
-            color: #B42318;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            margin-bottom: 12px;
-        }
-
-        h2 {
-            margin: 0;
-            font-size: 26px;
-        }
-
-        .subtitle {
-            margin-top: 6px;
-            font-size: 14px;
-            color: #666;
-            max-width: 800px;
-        }
-
-        /* Form */
-        .form-row {
-            margin-top: 22px;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
-        input[name="target"] {
-            flex: 1;
-            min-width: 260px;
-        }
-
-        input[name="ports"] {
-            width: 240px;
-        }
-
-        button {
-            background: #2f80ed;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Panel */
-        .panel {
-            margin-top: 28px;
-        }
-
-        .small {
-            font-size: 13px;
-            color: #666;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 18px;
-            table-layout: fixed;
-            font-size: 14px;
-        }
-
-        th {
-            background: #F2F5FA;
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            vertical-align: top;
-            word-wrap: break-word;
-        }
-
-        th:nth-child(1), td:nth-child(1){ width:120px; }
-        th:nth-child(2), td:nth-child(2){ width:70px; }
-        th:nth-child(3), td:nth-child(3){ width:150px; }
-        th:nth-child(4), td:nth-child(4){ width:90px; }
-        th:nth-child(5), td:nth-child(5){ width:180px; }
-        th:nth-child(6), td:nth-child(6){ width:auto; }
-
-        /* Banner */
-        pre {
-            background: #F2F5FA;
-            padding: 10px;
-            border-radius: 6px;
-            max-height: 140px;
-            overflow: auto;
-            white-space: pre-wrap;
-            word-break: break-word;
-            font-size: 13px;
-        }
-
-        /* Risk */
-        .risk-ok {
-            color: #27ae60;
-            font-weight: 600;
-        }
-
-        .risk-bad {
-            color: #eb5757;
-            font-weight: 600;
-        }
-
-        .risk-unknown {
-            color: #999;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="tool-container">
-
-    <a href="{{ url_for('index') }}" class="btn-back">← Dashboard</a>
-
-    <h2>🚩 BannerHunter — Service Fingerprinter</h2>
-    <p class="subtitle">
-        Grab service banners and identify running products and versions.
-        Risk flags are heuristic — always verify manually.
-    </p>
-
-    <form action="{{ url_for('bannerhunter') }}" method="POST" class="form-row" autocomplete="off">
-        <input
-            type="text"
-            name="target"
-            placeholder="Hostname or IP (e.g. scanme.nmap.org)"
-            required
-            value="{{ target or '' }}"
-        >
-        <input
-            type="text"
-            name="ports"
-            placeholder="Ports (e.g. 22,80,443)"
-            value="{{ ports or '' }}"
-        >
-        <button type="submit">Scan</button>
-    </form>
-
-    {% if target %}
-    <div class="panel">
-        <h3>Results for: <span class="small">{{ target }}</span></h3>
-        <div class="small">
-            Scanned at: {{ result.scanned_at if result else '—' }}
+        <div>
+            <h1 class="page-title">BannerHunter</h1>
+            <p class="page-desc">
+                Service banner grabbing and passive product fingerprinting
+            </p>
         </div>
-
-        {% if result.note %}
-            <p class="small">{{ result.note }}</p>
-        {% endif %}
-
-        {% if result.entries %}
-        <table>
-            <thead>
-                <tr>
-                    <th>IP</th>
-                    <th>Port</th>
-                    <th>Product</th>
-                    <th>Version</th>
-                    <th>Risk</th>
-                    <th>Banner / Raw</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for e in result.entries %}
-                <tr>
-                    <td>{{ e.ip }}</td>
-                    <td>{{ e.port }}</td>
-                    <td>{{ e.product or '-' }}</td>
-                    <td>{{ e.version or '-' }}</td>
-                    <td>
-                        {% if e.risk == 'ok' %}
-                            <span class="risk-ok">OK</span>
-                        {% elif e.risk == 'potentially_outdated' %}
-                            <span class="risk-bad">⚠ Potentially outdated</span>
-                        {% else %}
-                            <span class="risk-unknown">Unknown</span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <pre>{{ e.raw or e.error or '(no banner)' }}</pre>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-            <p class="small">No entries collected.</p>
-        {% endif %}
     </div>
-    {% endif %}
 
 </div>
 
-</body>
-</html>
+<div class="divider"></div>
+
+<!-- ================= SCAN FORM ================= -->
+<form action="{{ url_for('bannerhunter') }}"
+      method="POST"
+      autocomplete="off"
+      class="bh-form">
+
+    <input
+        type="text"
+        name="target"
+        class="bh-input"
+        placeholder="Hostname or IP (e.g. scanme.nmap.org)"
+        required
+        value="{{ target or '' }}"
+    >
+
+    <input
+        type="text"
+        name="ports"
+        class="bh-input ports"
+        placeholder="Ports (e.g. 22,80,443)"
+        value="{{ ports or '' }}"
+    >
+
+    <button type="submit" class="bh-btn primary">
+        Scan
+    </button>
+
+</form>
+
+{% if target %}
+<div class="divider"></div>
+
+<section class="bh-results">
+
+    <h3 class="bh-subtitle">
+        Results for <span class="bh-target">{{ target }}</span>
+    </h3>
+
+    <div class="bh-meta">
+        Scanned at: {{ result.scanned_at if result else '—' }}
+    </div>
+
+    {% if result.note %}
+        <div class="bh-note">{{ result.note }}</div>
+    {% endif %}
+
+    {% if result.entries %}
+    <table class="pg-table">
+        <thead>
+            <tr>
+                <th>IP</th>
+                <th>Port</th>
+                <th>Product</th>
+                <th>Version</th>
+                <th>Risk</th>
+                <th>Banner / Raw</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for e in result.entries %}
+            <tr class="
+                {% if e.risk == 'potentially_outdated' %}warn
+                {% elif e.risk == 'ok' %}safe
+                {% else %}{% endif %}
+            ">
+                <td>{{ e.ip }}</td>
+                <td>{{ e.port }}</td>
+                <td>{{ e.product or '-' }}</td>
+                <td>{{ e.version or '-' }}</td>
+                <td>
+                    {% if e.risk == 'ok' %}
+                        <span class="risk safe">OK</span>
+                    {% elif e.risk == 'potentially_outdated' %}
+                        <span class="risk warn">Potentially Outdated</span>
+                    {% else %}
+                        <span class="risk">Unknown</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <pre class="bh-pre">
+{{ e.raw or e.error or '(no banner)' }}
+                    </pre>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="bh-note">No entries collected.</div>
+    {% endif %}
+
+</section>
+{% endif %}
+
+{% endblock %}

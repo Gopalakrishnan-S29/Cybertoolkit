@@ -1,193 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TechStack Profiler | Cyber Security Toolkit</title>
+{% extends "base.html" %}
+{% block content %}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #EEE8DF;
-            color: #333;
-        }
+<!-- ================= TECHSTACK HEADER ================= -->
+<div class="pg-header-row">
 
-        .tool-container {
-            max-width: 900px;
-            margin: 48px auto;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 14px 30px rgba(0,0,0,0.08);
-        }
+    <div class="pg-header-left">
+        <a href="{{ url_for('reconnaissance') }}" class="pg-back-btn">← Back</a>
 
-        .btn-back {
-            display: inline-block;
-            background: #FDECEA;
-            color: #B42318;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            margin-bottom: 12px;
-        }
-
-        h2 {
-            margin: 0;
-            font-size: 26px;
-        }
-
-        .subtitle {
-            margin-top: 6px;
-            font-size: 14px;
-            color: #666;
-            max-width: 650px;
-        }
-
-        /* Form */
-        form {
-            margin-top: 22px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            margin-top: 12px;
-            background: #2f80ed;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .panel {
-            margin-top: 26px;
-        }
-
-        .small {
-            font-size: 13px;
-            color: #666;
-        }
-
-        h3 {
-            margin-top: 22px;
-            font-size: 18px;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 14px;
-            font-size: 14px;
-        }
-
-        th {
-            background: #F2F5FA;
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .present {
-            color: #27ae60;
-            font-weight: 600;
-        }
-
-        .missing {
-            color: #eb5757;
-            font-weight: 600;
-        }
-
-        .error {
-            background: #FDECEA;
-            color: #B42318;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-top: 14px;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="tool-container">
-
-    <a href="{{ url_for('index') }}" class="btn-back">← Dashboard</a>
-
-    <h2>🧠 TechStack Profiler</h2>
-    <p class="subtitle">
-        Identify technologies used by a website using passive and safe techniques.
-        No exploitation or intrusive scanning.
-    </p>
-
-    <form method="POST">
-        <input
-            type="text"
-            name="target"
-            placeholder="Enter website URL (e.g. https://example.com)"
-            required
-        >
-        <button type="submit">Analyze</button>
-    </form>
-
-    {% if result %}
-    <div class="panel">
-
-        {% if result.error %}
-            <div class="error">
-                {{ result.error }}
-            </div>
-        {% else %}
-
-            <p><strong>Target:</strong> {{ result.url }}</p>
-            <p><strong>Web Server:</strong> {{ result.server or 'Unknown' }}</p>
-            <p><strong>Backend:</strong> {{ result.backend | join(', ') or 'Unknown' }}</p>
-            <p><strong>CMS:</strong> {{ result.cms | join(', ') or 'None detected' }}</p>
-            <p><strong>JavaScript:</strong> {{ result.js | join(', ') or 'None detected' }}</p>
-
-            <h3>Security Headers</h3>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Header</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for h, v in result.security_headers.items() %}
-                    <tr>
-                        <td>{{ h }}</td>
-                        <td class="{{ 'present' if v == 'Present' else 'missing' }}">
-                            {{ v }}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
-        {% endif %}
+        <div>
+            <h1 class="page-title">TechStack Profiler</h1>
+            <p class="page-desc">
+                Passive identification of web technologies and security headers
+            </p>
+        </div>
     </div>
-    {% endif %}
 
 </div>
 
-</body>
-</html>
+<div class="divider"></div>
+
+<!-- ================= TARGET FORM ================= -->
+<form method="POST" class="ts-form">
+
+    <input
+        type="text"
+        name="target"
+        class="ts-input"
+        placeholder="Enter website URL (e.g. https://example.com)"
+        required
+    >
+
+    <button type="submit" class="ts-btn primary">
+        Analyze
+    </button>
+
+</form>
+
+<!-- ================= RESULTS ================= -->
+{% if result %}
+<div class="divider"></div>
+
+<section class="ts-results">
+
+    {% if result.error %}
+        <div class="ts-error">
+            {{ result.error }}
+        </div>
+    {% else %}
+
+        <div class="ts-summary">
+            <div><b>Target</b><span>{{ result.url }}</span></div>
+            <div><b>Web Server</b><span>{{ result.server or 'Unknown' }}</span></div>
+            <div><b>Backend</b><span>{{ result.backend | join(', ') or 'Unknown' }}</span></div>
+            <div><b>CMS</b><span>{{ result.cms | join(', ') or 'None detected' }}</span></div>
+            <div><b>JavaScript</b><span>{{ result.js | join(', ') or 'None detected' }}</span></div>
+        </div>
+
+        <h3 class="ts-subtitle">Security Headers</h3>
+
+        <table class="pg-table">
+            <thead>
+                <tr>
+                    <th>Header</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for h, v in result.security_headers.items() %}
+                <tr class="{% if v != 'Present' %}warn{% else %}safe{% endif %}">
+                    <td>{{ h }}</td>
+                    <td>
+                        {% if v == 'Present' %}
+                            <span class="risk safe">Present</span>
+                        {% else %}
+                            <span class="risk high">Missing</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+
+</section>
+{% endif %}
+
+{% endblock %}

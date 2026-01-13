@@ -1007,3 +1007,467 @@ body {
     color: var(--text-muted);
     text-align: center;
 }
+
+/* ======================================================
+   METASPY (THEME 18 – RECONNAISSANCE)
+   ====================================================== */
+
+.ms-upload-panel {
+    padding: 20px;
+    background: linear-gradient(180deg, #070b12, #05080f);
+    border-radius: 16px;
+    border: 1px solid var(--border-soft);
+}
+
+.ms-upload-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ms-file-input {
+    flex: 1;
+    background: #05080f;
+    border: 1px solid var(--border-soft);
+    color: var(--text-muted);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.ms-btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.ms-btn.primary:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.ms-options {
+    margin-top: 14px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.ms-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.ms-results {
+    margin-top: 10px;
+}
+
+.ms-subtitle {
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+
+.ms-error {
+    background: rgba(255,42,42,0.15);
+    color: var(--red-main);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.ms-kv {
+    display: flex;
+    gap: 14px;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.ms-kv b {
+    width: 160px;
+    color: var(--text-muted);
+}
+
+.ms-section-title {
+    margin-top: 22px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.ms-meta-list {
+    padding-left: 18px;
+    font-size: 14px;
+}
+
+.ms-meta-value {
+    word-break: break-word;
+}
+
+.ms-pre {
+    background: #05080f;
+    border: 1px solid var(--border-soft);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    overflow-x: auto;
+    margin-top: 6px;
+}
+/* ======================================================
+   BANNERHUNTER (THEME 18 – RECONNAISSANCE)
+   ====================================================== */
+
+.bh-form {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.bh-input {
+    background: #05080f;
+    border: 1px solid var(--border-soft);
+    color: var(--text-main);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 260px;
+}
+
+.bh-input.ports {
+    max-width: 260px;
+}
+
+.bh-btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.bh-btn.primary:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.bh-results {
+    margin-top: 6px;
+}
+
+.bh-subtitle {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.bh-target {
+    color: var(--blue-main);
+}
+
+.bh-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.bh-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.bh-pre {
+    background: #05080f;
+    border: 1px solid var(--border-soft);
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 160px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 13px;
+}
+/* ======================================================
+   TECHSTACK PROFILER (THEME 18 – RECON)
+   ====================================================== */
+
+.ts-form {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ts-input {
+    flex: 1;
+    min-width: 280px;
+    background: #05080f;
+    border: 1px solid var(--border-soft);
+    color: var(--text-main);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.ts-btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.ts-btn.primary:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.ts-results {
+    margin-top: 6px;
+}
+
+.ts-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px 24px;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.ts-summary div {
+    display: flex;
+    gap: 10px;
+}
+
+.ts-summary b {
+    min-width: 110px;
+    color: var(--text-muted);
+}
+
+.ts-subtitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.ts-error {
+    background: rgba(255,42,42,0.15);
+    color: var(--red-main);
+    padding: 12px;
+    border-radius: 10px;
+}
+/* ======================================================
+   TRACENET (THEME 18 – RECON)
+   ====================================================== */
+
+.tn-form {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.tn-input {
+    flex: 1;
+    min-width: 260px;
+    background: #05080f;
+    border: 1px solid var(--border-soft);
+    color: var(--text-main);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.tn-btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.tn-btn.primary:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.tn-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.tn-results {
+    margin-top: 6px;
+}
+
+.tn-subtitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.tn-target {
+    color: var(--blue-main);
+}
+
+.tn-link {
+    color: var(--blue-main);
+    word-break: break-word;
+}
+
+.tn-alert {
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.tn-alert.safe {
+    background: rgba(34,197,94,0.15);
+    color: var(--green-main);
+}
+
+.tn-alert.warn {
+    background: rgba(255,42,42,0.15);
+    color: var(--red-main);
+}
+
+.tn-breach-list {
+    padding-left: 18px;
+    font-size: 14px;
+}
+
+.tn-breach-list li {
+    margin-bottom: 6px;
+}
+/* ======================================================
+   CRAWLEYE (THEME 18 – RECON)
+   ====================================================== */
+
+.ce-crawl-box {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px;
+    border: 2px dashed rgba(56,189,248,0.35);
+    border-radius: 18px;
+    text-align: center;
+    background: linear-gradient(180deg, #070b12, #05080f);
+}
+
+.ce-title {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.ce-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.ce-inputs {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ce-input {
+    background: #05080f;
+    border: 1px solid var(--border-soft);
+    color: var(--text-main);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    min-width: 260px;
+}
+
+.ce-input.depth {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.ce-btn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--blue-main);
+    color: var(--blue-main);
+}
+
+.ce-btn.primary:hover {
+    background: var(--blue-main);
+    color: #000;
+}
+
+.ce-results {
+    margin-top: 10px;
+}
+
+.ce-subtitle {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.ce-target {
+    color: var(--blue-main);
+}
+
+.ce-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+}
+
+.ce-section-title {
+    margin-top: 22px;
+    font-size: 16px;
+}
+
+.ce-alert-list {
+    padding-left: 18px;
+}
+
+.ce-alert-list li.high {
+    color: var(--red-main);
+    font-weight: 600;
+}
+
+.ce-ok {
+    color: var(--green-main);
+    font-size: 14px;
+}
+
+.ce-muted {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.ce-list {
+    padding-left: 18px;
+    font-size: 14px;
+}
+
+.ce-link {
+    color: var(--blue-main);
+    word-break: break-word;
+}
