@@ -1,14 +1,82 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h2>History / Logs</h2>
 
-<p>
-    This page will display previous tool execution activity.
-</p>
+<!-- ================= HISTORY HEADER ================= -->
+<div class="pg-header-row">
 
-<p>
-    Currently, this is a placeholder for future logging
-    (session-based or file-based).
-</p>
+    <div class="pg-header-left">
+        <a href="{{ url_for('index') }}" class="pg-back-btn">
+            ← Back
+        </a>
+
+        <div>
+            <h1 class="page-title">History / Logs</h1>
+            <p class="page-desc">
+                Record of security scans, reconnaissance activity, and reports
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- ================= LOG TABLE ================= -->
+<section class="history-wrap">
+
+    <table class="pg-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Module</th>
+                <th>Tool</th>
+                <th>Target</th>
+                <th>Severity</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% if logs %}
+            {% for log in logs %}
+            <tr class="
+                {% if log.severity == 'High' %}risk
+                {% elif log.severity == 'Medium' %}warn
+                {% else %}safe{% endif %}
+            ">
+                <td>{{ log.timestamp }}</td>
+                <td>{{ log.module }}</td>
+                <td>{{ log.tool }}</td>
+                <td>{{ log.target or '—' }}</td>
+                <td>
+                    {% if log.severity == 'High' %}
+                        <span class="risk high">High</span>
+                    {% elif log.severity == 'Medium' %}
+                        <span class="risk warn">Medium</span>
+                    {% else %}
+                        <span class="risk safe">Low</span>
+                    {% endif %}
+                </td>
+                <td>{{ log.message }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6" style="text-align:center; color: var(--text-muted);">
+                    No history available yet
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= FOOTER NOTE ================= -->
+<div class="history-note">
+    Logs are stored per session for transparency and audit purposes.
+</div>
+
 {% endblock %}

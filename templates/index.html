@@ -1,65 +1,134 @@
+
 {% extends "base.html" %}
 {% block content %}
 
-<!-- PAGE HEADER -->
-<div class="page-header">
-    <h1 class="page-title">Welcome to CyberSec Toolkit</h1>
-    <p class="page-desc">
-        Security posture overview and quick access to core modules
-    </p>
-</div>
+<!-- MAIN PAGE CONTAINER -->
+<div class="page-wrapper">
 
-<br>
-<div class="divider"></div>
-<!-- ABOUT TOOLKIT -->
-<div class="panel">
-    <h2>About This Toolkit</h2>
-    <p>
-        Cyber Security Toolkit is a modular security platform designed
-        for defensive security analysis and reconnaissance. Tools are
-        grouped into focused modules to provide clarity, efficiency,
-        and operational control.
-    </p>
-</div>
-
-
-<div class="divider"></div>
-<br>
-<!-- QUICK MODULE ACCESS -->
-<div class="dashboard-modules">
-    <div class="dashboard-module">
-        <h3>🛡 System Security</h3>
-        <p>
-            Defensive tools to monitor ports, verify integrity,
-            analyze configurations, and detect threats.
+    <!-- HERO / PAGE HEADER -->
+    <div class="page-header hero-centered">
+        <h1 class="page-title">Welcome to CyberSec Toolkit</h1>
+        <div class="hero-glow-line"></div>
+        <p class="page-desc">
+            Security posture overview and quick access to core modules
         </p>
-        <a href="{{ url_for('system_security') }}">Open</a>
     </div>
 
-    <div class="dashboard-module">
-        <h3>🔍 Reconnaissance</h3>
+    <div class="divider"></div>
+
+    <!-- ABOUT TOOLKIT -->
+    <div class="panel">
+        <h2>About This Toolkit</h2>
         <p>
-            Information gathering tools for metadata extraction,
-            service discovery, and technology profiling.
+            Cyber Security Toolkit is a modular security platform designed
+            for defensive security analysis and reconnaissance. Tools are
+            grouped into focused modules to provide clarity, efficiency,
+            and operational control.
         </p>
-        <a href="{{ url_for('reconnaissance') }}">Open</a>
     </div>
-</div>
 
-<div class="divider"></div>
+    <!-- MODULE CATEGORIES -->
+    <div class="section-header">
+        <h2>Module Categories</h2>
+        <p class="section-desc">
+            Core security capabilities grouped by defensive and reconnaissance phases
+        </p>
+    </div>
 
+    <!-- DASHBOARD MODULES -->
+    <div class="dashboard-wrapper">
+        <div class="dashboard-modules">
 
+            <div class="dashboard-module">
+                <h3>🛡 System Security</h3>
+                <p>
+                    Defensive tools to monitor ports, verify integrity,
+                    analyze configurations, and detect threats.
+                </p>
+                <a href="{{ url_for('system_security') }}">Open</a>
+            </div>
 
+            <div class="dashboard-module">
+                <h3>🔍 Reconnaissance</h3>
+                <p>
+                    Information gathering tools for metadata extraction,
+                    service discovery, and technology profiling.
+                </p>
+                <a href="{{ url_for('reconnaissance') }}">Open</a>
+            </div>
 
-<!-- HOW TO USE -->
-<div class="panel">
-    <h2>How to Use</h2>
-    <ol>
-        <li>Select a module from the left sidebar</li>
-        <li>Choose the appropriate security tool</li>
-        <li>Provide required input and run the scan</li>
-        <li>Review results and act accordingly</li>
-    </ol>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- HOW TO USE -->
+    <div class="panel">
+        <h2>How to Use</h2>
+        <ol>
+            <li>Select a module from the left sidebar</li>
+            <li>Choose the appropriate security tool</li>
+            <li>Provide required input and run the scan</li>
+            <li>Review results and act accordingly</li>
+        </ol>
+    </div>
+
+    <!-- AVAILABLE TOOLS -->
+    <div class="section-header">
+        <h2>Available Tools</h2>
+        <p class="section-desc">
+            Tools used for system hardening, monitoring, and reconnaissance
+            during security assessments.
+        </p>
+    </div>
+
+    <!-- TOOL GALLERY -->
+    <div class="tool-gallery-panel">
+        <div class="tool-scroller-wrapper">
+            <section class="tool-scroller">
+                <div class="scroller-track">
+
+                    <!-- Reconnaissance -->
+                    <img src="{{ url_for('static', filename='images/reconnaissance/bannerhunter.jpg') }}" alt="BannerHunter">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/crawleye.jpg') }}" alt="CrawlEye">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/metaspy.jpg') }}" alt="MetaSpy">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/techstack.jpg') }}" alt="TechStack Profiler">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/tracenet.jpg') }}" alt="TraceNet">
+
+                    <!-- System Security -->
+                    <img src="{{ url_for('static', filename='images/system_security/config.png') }}" alt="ConfigGuard">
+                    <img src="{{ url_for('static', filename='images/system_security/integrity.png') }}" alt="Integrity Checker">
+                    <img src="{{ url_for('static', filename='images/system_security/portguardian.png') }}" alt="PortGuardian++">
+                    <img src="{{ url_for('static', filename='images/system_security/steg.png') }}" alt="StegGuardian">
+                    <img src="{{ url_for('static', filename='images/system_security/wifi_advanced.png') }}" alt="WiFiGuard Advanced">
+                    <img src="{{ url_for('static', filename='images/system_security/wifi.png') }}" alt="WiFiGuard">
+
+                    <!-- duplicate for infinite scroll -->
+                    <img src="{{ url_for('static', filename='images/reconnaissance/bannerhunter.jpg') }}">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/crawleye.jpg') }}">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/metaspy.jpg') }}">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/techstack.jpg') }}">
+                    <img src="{{ url_for('static', filename='images/reconnaissance/tracenet.jpg') }}">
+                    <img src="{{ url_for('static', filename='images/system_security/config.png') }}">
+                    <img src="{{ url_for('static', filename='images/system_security/integrity.png') }}">
+                    <img src="{{ url_for('static', filename='images/system_security/portguardian.png') }}">
+                    <img src="{{ url_for('static', filename='images/system_security/steg.png') }}">
+                    <img src="{{ url_for('static', filename='images/system_security/wifi_advanced.png') }}">
+                    <img src="{{ url_for('static', filename='images/system_security/wifi.png') }}">
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+        <p>
+            CyberSec Toolkit • Defensive Security & Reconnaissance Platform<br>
+            Built for learning, assessment, and continuous monitoring
+        </p>
+    </div>
+
 </div>
 
 {% endblock %}

@@ -21,21 +21,28 @@
     <!-- RIGHT: REPORT -->
     <div class="pg-header-action">
         <form action="{{ url_for('send_port_report') }}" method="POST">
-            <button class="pg-report-btn">Generate Report</button>
+            <button class="pg-report-btn">
+                Generate Report
+            </button>
         </form>
     </div>
 
 </div>
+
 <div class="divider"></div>
 
 <!-- ================= METRIC BOXES ================= -->
 <div class="pg-metric-boxes">
 
+    <!-- TOTAL PORTS (SAFE / GREEN) -->
     <div class="pg-metric-box safe">
         <span class="label">Total Open Ports</span>
-        <span class="value">{{ ports | length }}</span>
+        <span class="value">
+            {{ ports | length }}
+        </span>
     </div>
 
+    <!-- RISKY PORTS (DANGER / RED) -->
     <div class="pg-metric-box danger">
         <span class="label">Risky Ports</span>
         <span class="value">
@@ -62,8 +69,8 @@
         </thead>
 
         <tbody>
-            {% for entry in ports %}
-            <tr class="{% if entry.port in risky_ports %}risk{% endif %}">
+        {% for entry in ports %}
+            <tr class="{% if entry.port in risky_ports %}risk{% else %}safe{% endif %}">
                 <td>{{ entry.port }}</td>
                 <td>{{ entry.service }}</td>
                 <td>{{ entry.process }}</td>
@@ -76,7 +83,7 @@
                     {% endif %}
                 </td>
             </tr>
-            {% endfor %}
+        {% endfor %}
         </tbody>
     </table>
 

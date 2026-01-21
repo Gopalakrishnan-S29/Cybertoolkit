@@ -1,9 +1,11 @@
 # tools/crawleye.py
+
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from collections import deque
 
+# ================= COMMON SENSITIVE PATHS =================
 COMMON_SENSITIVE_PATHS = [
     "/admin",
     "/admin_old",
@@ -20,6 +22,11 @@ COMMON_SENSITIVE_PATHS = [
 
 
 class CrawlEye:
+    """
+    CrawlEye – Web Reconnaissance & Discovery Engine
+    Output keys are aligned with HTML and app.py
+    """
+
     def __init__(self, base_url, max_pages=50):
         if not base_url.startswith("http"):
             base_url = "http://" + base_url
@@ -36,6 +43,10 @@ class CrawlEye:
         self.sitemap_urls = []
         self.sensitive_hits = []
 
+    # ================= ENTRY POINT =================
+    def run(self):
+        return self.crawl()
+
     # ================= ROBOTS.TXT =================
     def parse_robots(self):
         robots_url = urljoin(self.base_url, "/robots.txt")
@@ -44,7 +55,7 @@ class CrawlEye:
             if r.status_code == 200:
                 for line in r.text.splitlines():
                     if line.lower().startswith("disallow"):
-                        path = line.split(":")[1].strip()
+                        path = line.split(":", 1)[1].strip()
                         if path:
                             self.robots_paths.append(path)
         except Exception:
@@ -62,12 +73,11 @@ class CrawlEye:
         except Exception:
             pass
 
-    # ================= SENSITIVE PATHS =================
+    # ================= SENSITIVE PATH CHECK =================
     def check_sensitive_paths(self):
         for path in COMMON_SENSITIVE_PATHS:
-            full = self.base_url + path
             try:
-                r = requests.get(full, timeout=4)
+                r = requests.get(self.base_url + path, timeout=4)
                 if r.status_code in (200, 401, 403):
                     self.sensitive_hits.append({
                         "path": path,
@@ -76,7 +86,7 @@ class CrawlEye:
             except Exception:
                 pass
 
-    # ================= PAGE CRAWLING =================
+    # ================= MAIN CRAWLER =================
     def crawl(self):
         self.parse_robots()
         self.parse_sitemap()
@@ -100,18 +110,18 @@ class CrawlEye:
             soup = BeautifulSoup(r.text, "html.parser")
 
             for a in soup.find_all("a", href=True):
-                href = a["href"]
-                url = urljoin(current, href)
+                url = urljoin(current, a["href"])
                 parsed = urlparse(url)
 
                 if parsed.netloc == self.domain:
-                    clean = parsed.scheme + "://" + parsed.netloc + parsed.path
+                    clean = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
                     if clean not in self.visited:
                         self.queue.append(clean)
 
         return {
+            "tool": "CrawlEye",
             "base_url": self.base_url,
-            "total_pages": len(self.discovered),
+            "total_urls": len(self.discovered),   # ✅ FIXED
             "urls": sorted(self.discovered),
             "robots": sorted(set(self.robots_paths)),
             "sitemap": sorted(set(self.sitemap_urls)),
