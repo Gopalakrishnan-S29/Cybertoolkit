@@ -1,5 +1,13 @@
 [
   {
+    "timestamp": "2026-01-22 13:45:14",
+    "module": "System Security",
+    "tool": "PortGuardian++",
+    "target": "localhost",
+    "severity": "High",
+    "message": "3 risky ports detected"
+  },
+  {
     "timestamp": "2026-01-21 08:57:35",
     "module": "Reconnaissance",
     "tool": "CrawlEye",
