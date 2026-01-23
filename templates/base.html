@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cyber Security Toolkit</title>
+    <title>CyberSentinel</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <!-- Font Awesome Icons -->
@@ -18,7 +18,7 @@
     <aside class="sidebar-dark">
 
         <div class="sidebar-brand">
-            Cyber Security Toolkit
+            CyberSentinel
         </div>
 
         <nav class="sidebar-menu">
@@ -29,17 +29,17 @@
                 <span class="menu-text">Home</span>
             </a>
 
-           <a href="{{ url_for('system_security') }}"
-   class="menu-item
-   {% if request.endpoint in [
-        'system_security',
-        'portguardian',
-        'wifiguard',
-        'wifiguard_v2',
-        'configguard',
-        'stegguardian',
-        'integrity_checker'
-   ] %}active{% endif %}">
+            <a href="{{ url_for('system_security') }}"
+               class="menu-item
+               {% if request.endpoint in [
+                    'system_security',
+                    'portguardian',
+                    'wifiguard',
+                    'wifiguard_v2',
+                    'configguard',
+                    'stegguardian',
+                    'integrity_checker'
+               ] %}active{% endif %}">
                 <span class="menu-icon"><i class="fa-solid fa-shield-halved"></i></span>
                 <span class="menu-text">System Security</span>
             </a>
@@ -72,6 +72,7 @@
     </main>
 
 </div>
+
 
 </body>
 </html>
